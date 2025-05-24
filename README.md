@@ -19,6 +19,12 @@ Aplicación web para una empresa con consumo de la API [DummyJSON](https://dummy
 
 Este proyecto es una aplicación web que permite gestionar usuarios, productos y carritos de compras consumiendo la API DummyJSON. Incluye autenticación, panel de administración y visualización de datos en tablas y modales.
 
+![image](https://github.com/user-attachments/assets/c6ead57c-c12e-45f3-a108-e755f293156c)
+![image](https://github.com/user-attachments/assets/c8aec1f7-fbb7-417f-bf25-36629f9d972a)
+![image](https://github.com/user-attachments/assets/19a68762-d578-49c4-bc06-7057ed78fea2)
+![image](https://github.com/user-attachments/assets/a91dce02-b98d-434f-b348-1425dac74066)
+![image](https://github.com/user-attachments/assets/a67b1434-de46-409f-b482-5d50cb3eb1e7)
+
 ---
 
 ## Estructura del Proyecto
