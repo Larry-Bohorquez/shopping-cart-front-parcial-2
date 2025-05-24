@@ -33,7 +33,7 @@ function usuarios() {
                         <td>${user.firstName}</td>
                         <td>${user.lastName}</td>
                         <td><img src="${user.image}" class="img-thumbnail" alt="avatar del usuario"></td>
-                        <td><button type="button" class="btn btn-outline-info" onclick="getUser('${user.id}')">Ver</button></td>
+                        <td><button type="button" class="btn btn-outline-info" onclick="getUser('${user.id}')"><i class="bi bi-eye"></i></button></td>
                     </tr>
                 `  
             });
@@ -95,7 +95,7 @@ function showModalUser(user) {
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
             </div>
         </div>

@@ -38,7 +38,7 @@ function productos() {
                             <td>${product.price}</td>
                             <td>${product.stock}</td>
                             <td><img src="${product.images}" class="img-thumbnail"></td>
-                            <td><button type="button" class="btn btn-outline-info" onclick="getProducts('${product.id}')">Ver</button></td>
+                            <td><button type="button" class="btn btn-outline-info" onclick="getProducts('${product.id}')" ><i class="bi bi-eye"></i></button></td>
                         </tr>
                 `
             });
@@ -74,7 +74,7 @@ function showModalProducts(product) {
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Ver Productos</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Ver Producto</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -90,7 +90,7 @@ function showModalProducts(product) {
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
             </div>
         </div>
