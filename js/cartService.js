@@ -33,7 +33,7 @@ function carts() {
                         <td>${cart.userId}</td>
                         <td>${cart.total}</td>
                         <td>${cart.totalProducts}</td>
-                        <td><button type="button" class="btn btn-outline-info" onclick="getCart('${cart.id}')">Ver</button></td>
+                        <td><button type="button" class="btn btn-outline-info" onclick="getCart('${cart.id}')"><i class="bi bi-eye"></i></button></td>
                     </tr>
                 `  
             });
