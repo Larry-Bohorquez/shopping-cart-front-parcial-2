@@ -1,8 +1,8 @@
 document.querySelector('#productos').addEventListener('click', () => productos('1'));
 
-function productos(page) {
+function productos() {
     document.getElementById('cardHeader').innerHTML = '<h5>Listado de productos</h5>'
-    const URL = 'https://dummyjson.com/products' + page;
+    const URL = 'https://dummyjson.com/products';
     fetch(URL, {
         method: 'GET',
         headers: {
@@ -10,7 +10,7 @@ function productos(page) {
             'x-api-key': 'reqres-free-v1'
         },
     })
-    .then(res => res.json().then(data => ({status: res.status, info: data.data})))
+    .then(res => res.json().then(data => ({status: res.status, info: data})))
     .then(resultado => {
 
         if (resultado.status === 200) {
@@ -19,52 +19,84 @@ function productos(page) {
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Año</th>
-                            <th scope="col">Color</th>
-                            <th scope="col">Demo Color</th>
+                            <th scope="col">Titulo</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Imagen</th>
+                            <th scope="col">Acción</th>
                         </tr>
                     </thead>
                     <tbody>
             `
-            resultado.info.forEach(producto => {
+            resultado.info.products.forEach(product => {
                 table = table + `
                         <tr>
-                            <td>${producto.id}</td>
-                            <td>${producto.name}</td>
-                            <td>${producto.year}</td>
-                            <td>${producto.color}</td>
-                            <td>
-                                <div style="width:100px; height:30px; background-color:${producto.color}; border:1px solid #000;"></div>
-                            </td>
+                            <td>${product.id}</td>
+                            <td>${product.title}</td>
+                            <td>${product.description}</td>
+                            <td>${product.price}</td>
+                            <td>${product.stock}</td>
+                            <td><img src="${product.images}" class="img-thumbnail"></td>
+                            <td><button type="button" class="btn btn-outline-info" onclick="getProducts('${product.id}')">Ver</button></td>
                         </tr>
                 `
             });
-            table += `
-                    </tbody>
-                </table>
-                <div class="d-flex justify-content-center">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#userPage1" onclick="productos('1')">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#userPage2" onclick="productos('2')">2</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            `
             document.getElementById('info').innerHTML = table;
         } else {
             document.getElementById('info').innerHTML = '<h3>No se encontro el usuario en la api</h3>';
         }
     })
+}
+
+function getProducts(id){ 
+    const REQRES_ENDPOINT = 'https://dummyjson.com/products/' + id
+    fetch(REQRES_ENDPOINT, {
+        method: 'GET',
+        headers: {
+            'Content-type': 'application/json',
+            'x-api-key': 'reqres-free-v1'
+        }
+    })
+    .then((response) =>response.json().then(data => ({status: response.status, info: data})))
+    .then(result => {
+        if (result.status === 200) {
+            showModalProducts(result.info);
+        } else {
+            document.getElementById('info').innerHTML = '<h3>No se encontro el producto en la api';
+        }
+    })
+}
+
+function showModalProducts(product) {
+    const modalProduct = `
+        <div class="modal fade" id="showModalProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Ver Productos</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <img src="${product.images}" class="card-img-top" alt="Avatar del Producto">
+                    <div class="card-body">
+                        <h5 class="card-title">Información del Producto</h5>
+                        <p class="card-text">Id: ${product.id}</p>
+                        <p class="card-text">Titulo: ${product.title}</p>
+                        <p class="card-text">Descripcion: ${product.description}</p>
+                        <p class="card-text">Precio: ${product.price}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+        </div>
+    `;
+    document.getElementById('modalUser').innerHTML = modalProduct;
+    const modal = new bootstrap.Modal(document.getElementById('showModalProduct'));
+    modal.show();
 }
